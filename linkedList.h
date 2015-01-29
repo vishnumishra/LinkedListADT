@@ -1,9 +1,9 @@
 typedef struct  node Node;
 typedef struct  linkedList LinkedList;
 typedef struct  node *node_ptr ;
-
+typedef void (travFun)(void*data);
 struct node {
-	int* data;
+	void* data;
     node_ptr next;
 };
 
@@ -24,3 +24,5 @@ LinkedList createList(void);
 Node * create_node(void *data);
 int add_to_list(LinkedList *,Node *);
 void *get_first_element(LinkedList list);	
+void *get_last_element(LinkedList list);
+void traverse(LinkedList, travFun*);
