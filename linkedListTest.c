@@ -534,6 +534,33 @@ void test_filter_filter_the_element_of_list_1(){
 
 };
 
+void printElement(void*data){
+	printf("%s\n", (char*)data);
+}
+
+void test_delete_string_from_a_list_by_given_index_1_and_gello_will_be_nomore_there(){
+	char* name = "hello";
+	char *name1 = "gello";
+	char *name2 = "ghello";
+	
+	int count,index=1,element;
+	node_ptr expected,expected1,expected2,result;
+
+	LinkedList list = createList();
+
+	expected = create_node((void*)name);
+	count = add_to_list(&list,expected);
+	
+	expected1 = create_node((void*)name1);
+	count = add_to_list(&list,expected1);
+
+	expected2 = create_node((void*)name2);
+	count = add_to_list(&list,expected2);
+	result = deleteElementAt(&list,index);
+	element = indexOf(list,(void*)name1);
+	assertEqual(strcmp((char*)(result)->data,"gello"),0);
+	assertEqual(element,-1);
+};
 
 
 

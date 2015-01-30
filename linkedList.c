@@ -62,16 +62,16 @@ void * getElementAt(LinkedList list,int index ){
 }
 
 int indexOf(LinkedList list, void * data){
-	int i,index=-1;
+	int i,index=0;
 	node_ptr element = list.head;
 	while(element != NULL){
-		index++;
 		if(memcmp(element->data,data,sizeof(data))==0){
 			return index;
 		}
 		element = (element)->next;
-	}	
-	return index;
+		index++;
+	}
+	return -1;
 }
 
 void * getNodeAt(LinkedList list,int index ){
@@ -89,7 +89,7 @@ void * getNodeAt(LinkedList list,int index ){
 }
 
 void * deleteElementAt(LinkedList *list,int index){
-	Node *previous,*tailElement,*next;
+	Node *previous,*tailElement,*next,*deleted;
 	if(index > list->count && index < 0) return NULL;
 	if(index ==0){
 		previous = list->head;
@@ -106,10 +106,11 @@ void * deleteElementAt(LinkedList *list,int index){
 		return tailElement;
 	}
 	previous = getNodeAt(*list,index-1);
+	deleted = getNodeAt(*list, index);
 	next = getNodeAt(*list,index+1);
 	(previous)->next = next;
 	list->count--;
-	return getNodeAt(*list, index);
+	return deleted;
 }
 
 int asArray(LinkedList list, void **array){
